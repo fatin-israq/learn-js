@@ -1,0 +1,42 @@
+<!-- Create 2 buttons to play the game. <heads><tails>
+When clicking 'heads' play the game with guess = 'heads'
+When clicking 'tails' play the game with guess = 'tails'
+Create a function 'playGame(guess)' to reuse the code. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coin Flip</title>
+  </head>
+  <body>
+    <button onclick="playGame('Heads');">Heads</button>
+    <button onclick="playGame('Tails');">Tails</button>
+
+    <p id="result"></p>
+
+    <script>
+      function playGame(guess) {
+        const randomNumber = Math.random();
+        let coinSide = "";
+
+        if (randomNumber <= 0.5) {
+          coinSide = "Heads";
+        } else {
+          coinSide = "Tails";
+        }
+
+        const resultMessage = `You picked ${guess}, and Coin flipped with ${coinSide}\n`;
+
+        if (coinSide === guess) {
+          document.getElementById("result").innerText =
+            resultMessage + " You Win!";
+        } else {
+          document.getElementById("result").innerText =
+            resultMessage + " You Lose!";
+        }
+      }
+    </script>
+  </body>
+</html>

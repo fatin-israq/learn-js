@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DOM</title>
+</head>
+
+<body>
+  <p>Youtube subscribe button</p>
+  <button onclick="subscribe();">Subscribe</button>
+
+  <div>
+    <p>Amazon shipping calculator</p>
+    <p> Orders under $40 = +$10 shipping.
+      <br>
+      Orders over $40 = FREE shipping. </p>
+    <input type="number" placeholder="Cost of order" class="js-cost-holder" onkeydown="handleCostKeyDown(event)"/>
+    <button onclick="calculate();">Calculate</button>
+    <p class="total-cost"></p>
+  </div>
+
+  <div>
+    <a href="../Objects/object-rock-paper-scissors.html">Rock Paper Scissors game</a>
+  </div>
+
+  <script>
+    function handleCostKeyDown(event){
+      if (event.key === 'Enter') {
+        calculate();
+      }
+    }
+
+    function calculate() {
+      let cost = Number(document.querySelector('.js-cost-holder').value);
+      if (cost < 0) {
+        alert('Please enter a valid number');
+        return;
+      } else if (cost < 40) {
+        cost += 10;
+      }
+      document.querySelector('.total-cost').innerHTML = `Total cost: $${cost}`;
+    }
+
+    function errorMsg() {
+      
+    }
+
+    function subscribe() {
+      btnElement = document.querySelector('button').innerHTML;
+      if (btnElement === 'Subscribe') {
+        document.querySelector('button').innerHTML = 'Subscribed';
+      } else if (btnElement === 'Subscribed') {
+        document.querySelector('button').innerHTML = 'Subscribe';
+      }
+    }
+  </script>
+</body>
+
+</html>
