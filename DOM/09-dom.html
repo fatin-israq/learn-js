@@ -4,12 +4,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f3f3;
+      padding: 40px;
+      color: #333;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+      background-color: rgb(1, 151, 1);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: green;
+    }
+
+    .subscribe {
+      background-color: #00142f;
+      border-radius: 20px;
+    }
+
+    .subscribe:hover {
+      background-color: #e0e0e0;
+      color: black;
+    }
+
+    input[type="number"] {
+      padding: 8px;
+      font-size: 16px;
+      margin-top: 10px;
+      width: 200px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .total-cost {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    div {
+      margin-top: 30px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #1a73e8;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
   <title>DOM</title>
 </head>
 
 <body>
   <p>Youtube subscribe button</p>
-  <button onclick="subscribe();">Subscribe</button>
+  <button onclick="subscribe();" class="subscribe">Subscribe</button>
 
   <div>
     <p>Amazon shipping calculator</p>
