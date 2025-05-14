@@ -42,6 +42,11 @@
       color: black;
     }
 
+    .is-subscribed {
+      background-color: #e0e0e0;
+      color: blue;
+    }
+
     input[type="number"] {
       padding: 8px;
       font-size: 16px;
@@ -88,7 +93,7 @@
   </div>
 
   <div>
-    <a href="../Objects/object-rock-paper-scissors.html">Rock Paper Scissors game</a>
+    <a href="./10-rock-paper-scissors-with-dom-css.html">Rock Paper Scissors game</a>
   </div>
 
   <script>
@@ -114,11 +119,13 @@
     }
 
     function subscribe() {
-      btnElement = document.querySelector('button').innerHTML;
-      if (btnElement === 'Subscribe') {
-        document.querySelector('button').innerHTML = 'Subscribed';
-      } else if (btnElement === 'Subscribed') {
-        document.querySelector('button').innerHTML = 'Subscribe';
+      btnElement = document.querySelector('button');
+      if (btnElement.innerHTML === 'Subscribe') {
+        btnElement.innerHTML = 'Subscribed';
+        btnElement.classList.add('is-subscribed');
+      } else if (btnElement.innerHTML === 'Subscribed') {
+        btnElement.innerHTML = 'Subscribe';
+        btnElement.classList.remove('is-subscribed');
       }
     }
   </script>
