@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --primary-color: #3a6ea5;
+            --secondary-color: #f0f5fa;
+            --accent-color: #ff6b6b;
+            --text-color: #333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        input[type="text"] {
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            width: 70%;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(58, 110, 165, 0.2);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 0.8rem 1.5rem;
+            margin-left: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        button:hover {
+            background-color: #2c5986;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .js-todo-list-2,
+        .js-todo-list-3 {
+            margin-top: 1.5rem;
+        }
+
+        .js-todo-list-2 p {
+            background-color: var(--secondary-color);
+            padding: 0.8rem 1rem;
+            border-radius: var(--border-radius);
+            margin: 0.5rem 0;
+            border: none;
+            font-weight: 400;
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        .js-todo-list-3 div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--secondary-color);
+            padding: 0.8rem 1rem;
+            border-radius: var(--border-radius);
+            margin: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .js-todo-list-3 div:hover {
+            background-color: #e6eef5;
+        }
+
+        .js-todo-list-3 button {
+            background-color: var(--accent-color);
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .js-todo-list-3 button:hover {
+            background-color: #ff5252;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            input[type="text"] {
+                width: 60%;
+            }
+        }
+    </style>
+    <title>Todo List</title>
+</head>
+
+<body>
+    <section>
+        <!-- Todo List v1.0  -->
+        <p>Todo List Practice</p>
+        <input type="text" placeholder="Todo Item" class="js-todo-item-1">
+        <button onclick="add_todo_1();">Add</button>
+    </section>
+
+    <section>
+        <!-- Todo List v2.1  -->
+        <p>Todo List Practice v2.0</p>
+        <input type="text" placeholder="Todo Item" class="js-todo-item-2">
+        <button onclick="addTodo2();">Add</button>
+        <div class="js-todo-list-2"></div>
+    </section>
+
+    <section>
+        <!-- Todo List v3.1  -->
+        <p>Todo List Practice v3.0</p>
+        <input type="text" placeholder="Todo Item" class="js-todo-item-3">
+        <button onclick="add_todo_3();">Add</button>
+        <div class="js-todo-list-3"></div>
+    </section>
+
+    <script>
+        let todo_list = [];
+        let todo_list_2 = [];
+        const todo_list_3 = [];
+
+        function add_todo_1() {
+            let todo_item = document.querySelector('.js-todo-item-1').value;
+            todo_list.push(todo_item);
+            console.log(todo_list);
+            document.querySelector('.js-todo-item-1').value = '';
+        }
+
+        function renderTodoList2() {
+            let todoListHTML = ``;
+
+            for (let i = 0; i < todo_list_2.length; i++) {
+                let todo = todo_list_2[i];
+                let html = `<p>${todo}</p>`;
+                todoListHTML += html;
+            }
+
+            document.querySelector('.js-todo-list-2').innerHTML = todoListHTML;
+        }
+
+        function addTodo2() {
+            const inputElement = document.querySelector('.js-todo-item-2');
+            const name = inputElement.value;
+
+            todo_list_2.push(name);
+            inputElement.value = '';
+
+            renderTodoList2();
+        }
+
+        function renderTodoList3() {
+            html = ``;
+
+            for (let i = 0; i < todo_list_3.length; i++) {
+                name = todo_list_3[i];
+                html += `<div>${name} <button onclick='dlt_todo(${i});'>
+                        Delete</button></div>`;
+                name.value = '';
+            }
+
+            document.querySelector('.js-todo-list-3').innerHTML = html;
+        }
+
+        function add_todo_3() {
+            let todoElement = document.querySelector('.js-todo-item-3');
+            let name = todoElement.value;
+            todoElement.value = '';
+
+            todo_list_3.push(name);
+            renderTodoList3();
+        }
+
+        function dlt_todo(i) {
+            todo_list_3.splice(i, 1);
+            renderTodoList3();
+        }
+
+    </script>
+</body>
+
+</html>
