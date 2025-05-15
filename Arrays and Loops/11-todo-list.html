@@ -69,6 +69,34 @@
             box-shadow: 0 0 0 3px rgba(58, 110, 165, 0.2);
         }
 
+        input[type="date"] {
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            margin-left: 0.5rem;
+            transition: var(--transition);
+            outline: none;
+            font-family: inherit;
+            color: var(--text-color);
+            background-color: white;
+        }
+
+        input[type="date"]:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(58, 110, 165, 0.2);
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator:hover {
+            opacity: 1;
+        }
+
         button {
             background-color: var(--primary-color);
             color: white;
@@ -91,11 +119,13 @@
             transform: translateY(0);
         }
 
+        /* Todo list containers */
         .js-todo-list-2,
         .js-todo-list-3 {
             margin-top: 1.5rem;
         }
 
+        /* Todo list v2.0 items */
         .js-todo-list-2 p {
             background-color: var(--secondary-color);
             padding: 0.8rem 1rem;
@@ -107,31 +137,59 @@
             color: var(--text-color);
         }
 
+        /* Todo list v3.0 items */
         .js-todo-list-3 div {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background-color: var(--secondary-color);
-            padding: 0.8rem 1rem;
+            padding: 1rem 1.2rem;
             border-radius: var(--border-radius);
-            margin: 0.5rem 0;
+            margin: 0.8rem 0;
             transition: var(--transition);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .js-todo-list-3 div:hover {
             background-color: #e6eef5;
+            transform: translateX(3px);
+        }
+
+        .js-todo-list-3 .todo-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .js-todo-list-3 .todo-name {
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .js-todo-list-3 .todo-date {
+            font-size: 0.85rem;
+            color: #666;
         }
 
         .js-todo-list-3 button {
             background-color: var(--accent-color);
             padding: 0.5rem 1rem;
             font-size: 0.9rem;
+            margin-left: 1rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
         }
 
         .js-todo-list-3 button:hover {
             background-color: #ff5252;
+            transform: translateY(-2px);
         }
 
+        .js-todo-list-3 button:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive styles */
         @media (max-width: 600px) {
             body {
                 padding: 1rem;
@@ -143,6 +201,20 @@
 
             input[type="text"] {
                 width: 60%;
+            }
+
+            input[type="date"] {
+                width: calc(60% - 0.5rem);
+            }
+
+            .js-todo-list-3 div {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .js-todo-list-3 button {
+                margin: 0.8rem 0 0 0;
+                align-self: flex-end;
             }
         }
     </style>
@@ -159,7 +231,7 @@
 
     <section>
         <!-- Todo List v2.1  -->
-        <p>Todo List Practice v2.0</p>
+        <p>Todo List Practice v2.1</p>
         <input type="text" placeholder="Todo Item" class="js-todo-item-2">
         <button onclick="addTodo2();">Add</button>
         <div class="js-todo-list-2"></div>
@@ -167,8 +239,9 @@
 
     <section>
         <!-- Todo List v3.1  -->
-        <p>Todo List Practice v3.0</p>
+        <p>Todo List Practice v3.2</p>
         <input type="text" placeholder="Todo Item" class="js-todo-item-3">
+        <input type="date" class="js-duedate">
         <button onclick="add_todo_3();">Add</button>
         <div class="js-todo-list-3"></div>
     </section>
@@ -176,7 +249,7 @@
     <script>
         let todo_list = [];
         let todo_list_2 = [];
-        const todo_list_3 = [];
+        const todo_list_3 = [{ name: "Make Dinner", dueDate: "10-12-2045" }];
 
         function add_todo_1() {
             let todo_item = document.querySelector('.js-todo-item-1').value;
@@ -208,12 +281,18 @@
         }
 
         function renderTodoList3() {
-            html = ``;
+            let html = ``;
 
             for (let i = 0; i < todo_list_3.length; i++) {
-                name = todo_list_3[i];
-                html += `<div>${name} <button onclick='dlt_todo(${i});'>
-                        Delete</button></div>`;
+                let name = todo_list_3[i].name;
+                let dueDate = todo_list_3[i].dueDate;
+                html += `<div>
+                    <div class="todo-content">
+                        <span class="todo-name">${name}</span>
+                        <span class="todo-date">Due: ${dueDate}</span>
+                    </div>
+                    <button onclick='dlt_todo(${i});'>Delete</button>
+                </div>`;
                 name.value = '';
             }
 
@@ -223,9 +302,11 @@
         function add_todo_3() {
             let todoElement = document.querySelector('.js-todo-item-3');
             let name = todoElement.value;
+            let dueDateElement = document.querySelector('.js-duedate');
+            let dueDate = dueDateElement.value;
             todoElement.value = '';
 
-            todo_list_3.push(name);
+            todo_list_3.push({ name, dueDate });
             renderTodoList3();
         }
 
