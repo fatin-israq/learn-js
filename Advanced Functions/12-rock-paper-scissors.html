@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rock Paper Scissors</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: x-large;
+            padding-left: 30px;
+        }
+
+        .css-moves {
+            background-color: black;
+            border-radius: 100%;
+            padding: 20px;
+            border: 3px solid #555;
+        }
+
+        .css-moves img {
+            width: 70px;
+        }
+
+        .css-moves:hover {
+            background-color: #555;
+            transition: 0.3s;
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+
+        .js-imgs img {
+            width: 40px;
+        }
+
+        .reset-btn,
+        .auto-play-btn {
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .reset-btn:hover,
+        .auto-play-btn:hover {
+            transform: translateY(10);
+            transition: 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Rock Paper Scissors</h2>
+    <button onclick="
+      playGame('rock');
+    " class="css-moves">
+        <img src="../Images/rock-emoji.png" alt="Rock">
+    </button>
+
+    <button onclick="
+      playGame('paper');
+    " class="css-moves">
+        <img src="../Images/paper-emoji.png" alt="Paper">
+    </button>
+
+    <button onclick="
+      playGame('scissors');
+    " class="css-moves">
+        <img src="../Images/scissors-emoji.png" alt="Scissors">
+    </button>
+
+    <div class="js-imgs">
+        <p class="js-result"></p>
+        <p class="js-move"></p>
+        <p class="js-score"></p>
+    </div>
+
+    <button onclick="reset()" class="reset-btn">
+        Reset Score</button>
+
+    <button class="auto-play-btn" onclick="autoplay()">Auto Play</button>
+
+    <script>
+        let score = JSON.parse(localStorage.getItem("score")) || {
+            wins: 0,
+            losses: 0,
+            ties: 0,
+        };
+
+        let isAutoPlaying = false;
+        let intervalID;
+
+        updateScoreElement();
+
+        function reset() {
+            score.wins = 0;
+            score.losses = 0;
+            score.ties = 0;
+            localStorage.removeItem('score');
+            updateScoreElement();
+            document.querySelector('.js-result').innerHTML = '';
+            document.querySelector('.js-move').innerHTML = '';
+        }
+
+        function autoplay() {
+            if (!isAutoPlaying) {
+                intervalID = setInterval(function () {
+                    let playerMove = pickComputerMove();
+                    playGame(playerMove);
+                }, 2000)
+                isAutoPlaying = true;
+                document.querySelector('.auto-play-btn').innerHTML = 'Stop Play';
+            } else {
+                clearInterval(intervalID);
+                isAutoPlaying = false;
+                document.querySelector('.auto-play-btn').innerHTML = 'Auto Play';
+            }
+
+        }
+
+        function playGame(playerMove) {
+            const computerMove = pickComputerMove();
+
+            let result = "";
+
+            if (playerMove === "scissors") {
+                if (computerMove === "rock") {
+                    result = "You lose.";
+                } else if (computerMove === "paper") {
+                    result = "You win.";
+                } else if (computerMove === "scissors") {
+                    result = "Tie.";
+                }
+            } else if (playerMove === "paper") {
+                if (computerMove === "rock") {
+                    result = "You win.";
+                } else if (computerMove === "paper") {
+                    result = "Tie.";
+                } else if (computerMove === "scissors") {
+                    result = "You lose.";
+                }
+            } else if (playerMove === "rock") {
+                if (computerMove === "rock") {
+                    result = "Tie.";
+                } else if (computerMove === "paper") {
+                    result = "You lose.";
+                } else if (computerMove === "scissors") {
+                    result = "You win.";
+                }
+            }
+
+            if (result === "You win.") {
+                score.wins += 1;
+            } else if (result === "You lose.") {
+                score.losses += 1;
+            } else if (result === "Tie.") {
+                score.ties += 1;
+            }
+            localStorage.setItem("score", JSON.stringify(score));
+
+            updateScoreElement();
+            document.querySelector(".js-result").innerHTML = result;
+            document.querySelector(".js-move").innerHTML =
+                `You played <img src="../Images/${playerMove}-emoji.png" alt="${playerMove}">. Computer played <img src="../Images/${computerMove}-emoji.png" alt="${computerMove}">.`;
+        }
+
+        function updateScoreElement() {
+            document.querySelector(".js-score")
+                .innerHTML =
+                `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
+        }
+
+        function pickComputerMove() {
+            const randomNumber = Math.random();
+
+            let computerMove = "";
+
+            if (randomNumber >= 0 && randomNumber < 1 / 3) {
+                computerMove = "rock";
+            } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
+                computerMove = "paper";
+            } else if (randomNumber >= 2 / 3 && randomNumber < 1) {
+                computerMove = "scissors";
+            }
+
+            return computerMove;
+        }
+    </script>
+</body>
+
+</html>
