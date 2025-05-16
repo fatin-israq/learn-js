@@ -106,22 +106,26 @@
             updateScoreElement();
             document.querySelector('.js-result').innerHTML = '';
             document.querySelector('.js-move').innerHTML = '';
+            stopPlay();
         }
 
         function autoplay() {
             if (!isAutoPlaying) {
-                intervalID = setInterval(function () {
+                intervalID = setInterval(() => {
                     let playerMove = pickComputerMove();
                     playGame(playerMove);
-                }, 2000)
+                }, 1000)
                 isAutoPlaying = true;
                 document.querySelector('.auto-play-btn').innerHTML = 'Stop Play';
             } else {
-                clearInterval(intervalID);
-                isAutoPlaying = false;
-                document.querySelector('.auto-play-btn').innerHTML = 'Auto Play';
+                stopPlay();
             }
+        }
 
+        function stopPlay() {
+            clearInterval(intervalID);
+            isAutoPlaying = false;
+            document.querySelector('.auto-play-btn').innerHTML = 'Auto Play';
         }
 
         function playGame(playerMove) {
