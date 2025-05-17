@@ -1,0 +1,51 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: x-large;
+  padding-left: 30px;
+}
+
+.css-moves {
+  background-color: black;
+  border-radius: 100%;
+  padding: 20px;
+  border: 3px solid #555;
+}
+
+.css-moves img {
+  width: 70px;
+}
+
+.css-moves:hover {
+  background-color: #555;
+  transition: 0.3s;
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.js-imgs img {
+  width: 40px;
+}
+
+.reset-btn,
+.auto-play-btn,
+.js-reset-yes,
+.js-reset-no {
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-top: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.reset-btn:hover,
+.auto-play-btn:hover,
+.js-reset-yes:hover,
+.js-reset-no:hover {
+  background-color: #767575;
+}
