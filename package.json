@@ -1,0 +1,28 @@
+{
+  "name": "learn",
+  "version": "1.0.0",
+  "description": "Welcome to my JavaScript learning journey! This repository contains code snippets, exercises, and notes as I explore the fundamentals of **vanilla JavaScript**. Whether it's simple variables or basic DOM manipulation, this is where I practice and reinforce core JS concepts.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fatin-israq/learn-js.git"
+  },
+  "keywords": [
+    "JavaScript",
+    "Learning",
+    "Web development"
+  ],
+  "author": "Fatin Israq Talha",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/fatin-israq/learn-js/issues"
+  },
+  "homepage": "https://github.com/fatin-israq/learn-js#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
