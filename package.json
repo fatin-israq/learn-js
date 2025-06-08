@@ -17,12 +17,13 @@
   ],
   "author": "Fatin Israq Talha",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/fatin-israq/learn-js/issues"
   },
   "homepage": "https://github.com/fatin-israq/learn-js#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
   }
 }
